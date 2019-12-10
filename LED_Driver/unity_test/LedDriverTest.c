@@ -57,4 +57,11 @@ TEST(LedDriver, TurnOffAllLeds)
 	LedDriver_TurnOffAllLeds();
 	TEST_ASSERT_EQUAL_HEX16(0, virtualLeds);
 }
+
+TEST(LedDriver, ReadLedMemory)
+{
+	virtualLeds = 0xffff;
+	LedDriver_TurnOn(8); // turns on LED in actual LED memory
+	TEST_ASSERT_EQUAL_HEX16(0x80, virtualLeds);
+}
 #endif
