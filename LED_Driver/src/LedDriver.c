@@ -31,13 +31,15 @@ void LedDriver_TurnOn(int8_t led_number)
 	updateHardware();
 }
 
-void LedDriver_TurnOff(uint8_t led_number)
+void LedDriver_TurnOff(int8_t led_number)
 {
-	if (led_number >= 1 && led_number <= 16)
+	if (led_number <= 0 || led_number > 16)
 	{
-		ledsImage &= ~CONVERT_LED_NUM_TO_BIT(led_number);
-		updateHardware();
+		RUNTIME_ERROR("Led Driver: out of bounds LED", led_number);
+		return;
 	}
+	ledsImage &= ~CONVERT_LED_NUM_TO_BIT(led_number);
+	updateHardware();
 }
 
 void LedDriver_TurnOnAllLeds(void)

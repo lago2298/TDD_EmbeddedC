@@ -74,10 +74,12 @@ TEST(LedDriver, WithinBounds)
 }
 
 TEST(LedDriver, TurnOnOutOfBounds)
-{
-	LedDriver_TurnOn(-1);
-	TEST_ASSERT_EQUAL_STRING("Led Driver: out of bounds LED", RuntimeErrorStub_GetLastError());
-	TEST_ASSERT_EQUAL(-1, RuntimeErrorStub_GetLastParameter());
+{	
+	LedDriver_TurnOn(0);
+	LedDriver_TurnOn(43);
+	LedDriver_TurnOn(-10);
+	LedDriver_TurnOn(58);
+	TEST_ASSERT_EQUAL_HEX16(0, virtualLeds);
 }
 
 TEST(LedDriver, TurnOffOutOfBounds)
@@ -88,6 +90,29 @@ TEST(LedDriver, TurnOffOutOfBounds)
 	LedDriver_TurnOff(-2);
 	LedDriver_TurnOff(200);
 	TEST_ASSERT_EQUAL_HEX16(0xffff, virtualLeds);
+}
+
+TEST(LedDriver, OutOfBoundsTurnOnLEDThrowsRuntimeError)
+{
+	LedDriver_TurnOn(-1);
+	TEST_ASSERT_EQUAL_STRING("Led Driver: out of bounds LED", RuntimeErrorStub_GetLastError());
+	TEST_ASSERT_EQUAL(-1, RuntimeErrorStub_GetLastParameter());
+}
+
+TEST(LedDriver, OutOfBoundsTurnOffLEDThrowsRuntimeError)
+{
+	LedDriver_TurnOnAllLeds();	
+	LedDriver_TurnOff(0);
+	TEST_ASSERT_EQUAL_STRING("Led Driver: out of bounds LED", RuntimeErrorStub_GetLastError());
+	TEST_ASSERT_EQUAL(0, RuntimeErrorStub_GetLastParameter());
+	LedDriver_TurnOff(20);
+	TEST_ASSERT_EQUAL_STRING("Led Driver: out of bounds LED", RuntimeErrorStub_GetLastError());
+	TEST_ASSERT_EQUAL(20, RuntimeErrorStub_GetLastParameter());
+}
+
+IGNORE_TEST(LedDriver, OutOfBoundsToDo)
+{
+//stuff
 }
 
 #endif

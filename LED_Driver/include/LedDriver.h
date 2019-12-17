@@ -3,13 +3,11 @@
 
 #include <stdint.h>
 
-static void updateHardware(void);
-
 void LedDriver_Create(uint16_t *address);
 
 void LedDriver_TurnOn(int8_t led_number);
 
-void LedDriver_TurnOff(uint8_t led_number);
+void LedDriver_TurnOff(int8_t led_number);
 
 void LedDriver_TurnOnAllLeds(void);
 
