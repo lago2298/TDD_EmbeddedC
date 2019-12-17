@@ -1,6 +1,7 @@
 #if 1
 #include "unity_fixture.h"
 #include "LedDriver.h"
+#include "RuntimeErrorStub.h"
 
 static uint16_t virtualLeds;
 
@@ -64,4 +65,29 @@ TEST(LedDriver, ReadLedMemory)
 	LedDriver_TurnOn(8); // turns on LED in actual LED memory
 	TEST_ASSERT_EQUAL_HEX16(0x80, virtualLeds);
 }
+
+TEST(LedDriver, WithinBounds)
+{
+	LedDriver_TurnOn(1);
+	LedDriver_TurnOn(16);
+	TEST_ASSERT_EQUAL_HEX16(0x8001, virtualLeds);
+}
+
+TEST(LedDriver, TurnOnOutOfBounds)
+{
+	LedDriver_TurnOn(-1);
+	TEST_ASSERT_EQUAL_STRING("Led Driver: out of bounds LED", RuntimeErrorStub_GetLastError());
+	TEST_ASSERT_EQUAL(-1, RuntimeErrorStub_GetLastParameter());
+}
+
+TEST(LedDriver, TurnOffOutOfBounds)
+{
+	LedDriver_TurnOnAllLeds();	
+	LedDriver_TurnOff(0);
+	LedDriver_TurnOff(20);
+	LedDriver_TurnOff(-2);
+	LedDriver_TurnOff(200);
+	TEST_ASSERT_EQUAL_HEX16(0xffff, virtualLeds);
+}
+
 #endif

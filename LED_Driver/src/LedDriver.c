@@ -1,4 +1,5 @@
 #include "LedDriver.h"
+#include "RuntimeError.h"
 
 #define CONVERT_LED_NUM_TO_BIT(n) (1 << (n-1))
 
@@ -19,16 +20,24 @@ void LedDriver_Create(uint16_t *address)
 	updateHardware();
 }
 
-void LedDriver_TurnOn(uint8_t led_number)
+void LedDriver_TurnOn(int8_t led_number)
 {
+	if (led_number <= 0  || led_number > 16)
+	{
+		RUNTIME_ERROR("Led Driver: out of bounds LED", led_number);
+		return;
+	}
 	ledsImage |= CONVERT_LED_NUM_TO_BIT(led_number);
 	updateHardware();
 }
 
 void LedDriver_TurnOff(uint8_t led_number)
 {
-	ledsImage &= ~CONVERT_LED_NUM_TO_BIT(led_number);
-	updateHardware();
+	if (led_number >= 1 && led_number <= 16)
+	{
+		ledsImage &= ~CONVERT_LED_NUM_TO_BIT(led_number);
+		updateHardware();
+	}
 }
 
 void LedDriver_TurnOnAllLeds(void)

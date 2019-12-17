@@ -23,6 +23,7 @@ UNITY_WARNINGFLAGS = -Wswitch-default
 
 SRC_DIRS = \
 	$(PROJECT_HOME_DIR)/src\
+ 	$(PROJECT_HOME_DIR)/mocks\
 
 TEST_SRC_DIRS = \
 	$(PROJECT_TEST_DIR)\
@@ -38,6 +39,7 @@ INCLUDE_DIRS =\
   $(UNITY_HOME)/extras/fixture/test\
   $(PROJECT_HOME_DIR)/include\
   $(PROJECT_HOME_DIR)/include/util\
+  $(PROJECT_HOME_DIR)/mocks\
   
 include $(UNITY_BUILD_HOME)/MakefileWorker.mk
 

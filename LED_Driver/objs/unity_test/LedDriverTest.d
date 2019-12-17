@@ -5,7 +5,7 @@ objs/unity_test/LedDriverTest.o: unity_test/LedDriverTest.c \
  unity.framework/src/unity_internals.h \
  unity.framework/extras/fixture/src/unity_fixture_malloc_overrides.h \
  unity.framework/extras/fixture/src/unity_fixture_internals.h \
- include/LedDriver.h
+ include/LedDriver.h mocks/RuntimeErrorStub.h
 
 unity.framework/extras/fixture/src/unity_fixture_malloc_overrides.h:
 
@@ -22,3 +22,5 @@ unity.framework/extras/fixture/src/unity_fixture_malloc_overrides.h:
 unity.framework/extras/fixture/src/unity_fixture_internals.h:
 
 include/LedDriver.h:
+
+mocks/RuntimeErrorStub.h:

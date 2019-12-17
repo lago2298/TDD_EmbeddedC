@@ -1,9 +1,7 @@
-objs/./src/LedDriver.o: src/LedDriver.c \
+objs/./mocks/RuntimeErrorStub.o: mocks/RuntimeErrorStub.c \
  unity.framework/extras/fixture/src/unity_fixture_malloc_overrides.h \
- include/LedDriver.h include/util/RuntimeError.h
+ mocks/RuntimeErrorStub.h
 
 unity.framework/extras/fixture/src/unity_fixture_malloc_overrides.h:
 
-include/LedDriver.h:
-
-include/util/RuntimeError.h:
+mocks/RuntimeErrorStub.h:
