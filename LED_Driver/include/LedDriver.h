@@ -2,6 +2,7 @@
 #define LEDDRIVER_H
 
 #include <stdint.h>
+#include <stdbool.h>
 
 void LedDriver_Create(uint16_t *address);
 
