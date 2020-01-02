@@ -70,3 +70,18 @@ void LedDriver_TurnOffAllLeds(void)
 	ledsImage = ALL_LEDS_OFF;
 	updateHardware();
 }
+
+// Query LED Driver to see if particular LED is on
+bool LedDriver_IsOn(int8_t led_number)
+{
+	if(isLedNumberOutOfBounds(led_number))
+	{
+		return false;
+	}
+	return ledsImage & CONVERT_LED_NUM_TO_BIT(led_number);
+}
+
+bool LedDriver_IsOff(int8_t led_number)
+{
+	return !LedDriver_IsOn(led_number);
+}

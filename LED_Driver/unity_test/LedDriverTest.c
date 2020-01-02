@@ -110,9 +110,24 @@ TEST(LedDriver, OutOfBoundsTurnOffLEDThrowsRuntimeError)
 	TEST_ASSERT_EQUAL(20, RuntimeErrorStub_GetLastParameter());
 }
 
-IGNORE_TEST(LedDriver, OutOfBoundsToDo)
+TEST(LedDriver, LedDriverIsOn)
 {
-//stuff
+	TEST_ASSERT_FALSE(LedDriver_IsOn(11));
+	LedDriver_TurnOn(11);
+	TEST_ASSERT_TRUE(LedDriver_IsOn(11));
+}
+
+TEST(LedDriver, LedDriverIsOff)
+{
+	TEST_ASSERT_TRUE(LedDriver_IsOff(11));
+	LedDriver_TurnOn(11);
+	TEST_ASSERT_FALSE(LedDriver_IsOff(11));
+}
+
+TEST(LedDriver, OutOfBoundsLEDAlwaysOff)
+{
+	TEST_ASSERT_FALSE(LedDriver_IsOn(20));
+	TEST_ASSERT_TRUE(LedDriver_IsOff(20));
 }
 
 #endif

@@ -14,4 +14,8 @@ void LedDriver_TurnOnAllLeds(void);
 
 void LedDriver_TurnOffAllLeds(void);
 
+bool LedDriver_IsOn(int8_t led_number);
+
+bool LedDriver_IsOff(int8_t led_number);
+
 #endif /* LEDDRIVER_H */
